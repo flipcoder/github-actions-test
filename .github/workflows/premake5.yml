@@ -1,0 +1,21 @@
+name: C/C++ Premake5 CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: install-premake
+      run: |
+        wget https://github.com/premake/premake-core/releases/download/v5.0.0-alpha15/premake-5.0.0-alpha15-linux.tar.gz premake5.tar.gz
+        tar xzf premake5.tar.gz
+    - name: premake
+      run: ./premake5 gmake config=release
